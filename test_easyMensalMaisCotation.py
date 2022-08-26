@@ -3,26 +3,29 @@
 # Comando para abrir relatórios gerados no Allure:  allure serve ./_tests/_reports/_allureReports/_reportEasyLogin/
 
 import unittest
+import pytest
 from _webDriver.WebDriver import Driver
 from _pageObjects.easyLogin import EasyLogin
 from _pageObjects.easyDashboard import EasyDashboard
 
 
 class TestClass(unittest.TestCase):
-
     def setUp(self):
         self.driver = Driver()
 
     def tearDown(self):
         self.driver.instance.quit()
 
-    def login(self):
+    #@unittest.skip("Não é um teste.")
+    @pytest.mark.skip(reason="No need test this.")
+    def test_login(self):
         launchEasyLogin = EasyLogin(self.driver.instance)
         launchEasyLogin.easyLogin()
         assert launchEasyLogin.is_logged()
-
+   
     def test_openCotation(self):
-        self.login()
+        self.test_login()
         cotation = EasyDashboard(self.driver.instance)
         cotation.openCotation()
-        assert EasyDashboard.is_cotation()
+        assert cotation.is_cotation()
+        

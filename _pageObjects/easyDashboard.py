@@ -18,3 +18,4 @@ class EasyDashboard(Base):
             print('Fluxo de cotação iniciado com sucesso!')
         else:
             print('Falha ao iniciar fluxo de cotação!')
+        return is_cotation
