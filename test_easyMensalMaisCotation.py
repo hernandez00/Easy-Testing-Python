@@ -28,4 +28,3 @@ class TestClass(unittest.TestCase):
         cotation = EasyDashboard(self.driver.instance)
         cotation.openCotation()
         assert cotation.is_cotation()
-        
