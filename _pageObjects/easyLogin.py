@@ -25,5 +25,5 @@ class EasyLogin(Base):
         if is_logged:
             print("Login realizado com sucesso!")
         else:
-            print("Algo deu errado!")
+            print("Falha no Login!")
         return is_logged

@@ -16,13 +16,13 @@ class TestClass(unittest.TestCase):
     def tearDown(self):
         self.driver.instance.quit()
 
-    def test_login(self):
+    def login(self):
         launchEasyLogin = EasyLogin(self.driver.instance)
         launchEasyLogin.easyLogin()
         assert launchEasyLogin.is_logged()
 
-    """    
-    def test_cotation(self):
-        launchEasyCotation = EasyDashboard(self.driver.instance)
-        launchEasyCotation.easyDashboardCotation()
-    """
+    def test_openCotation(self):
+        self.login()
+        cotation = EasyDashboard(self.driver.instance)
+        cotation.openCotation()
+        assert EasyDashboard.is_cotation()
