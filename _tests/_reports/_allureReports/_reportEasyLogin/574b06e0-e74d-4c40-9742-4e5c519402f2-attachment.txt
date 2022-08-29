@@ -1,0 +1,2 @@
+Login realizado com sucesso!
+Fluxo de cotação iniciado com sucesso!
