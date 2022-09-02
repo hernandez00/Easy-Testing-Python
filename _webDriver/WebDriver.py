@@ -7,4 +7,5 @@ class Driver:
     def __init__(self):
         self.instance = webdriver.Chrome(
             service=ChromeService(ChromeDriverManager().install()))
+        #webdriver.ChromeOptions.add_argument(self, argument)
         self.instance.get("https://easy.hml.unidas.com.br/login")
