@@ -1,0 +1,6 @@
+Tela de seleção de data e hora, ir para seleção de grupos:
+//button[contains(strong, "Selecionar o grupo")]
+
+Botão para selecionar um grupo no carousel:
+//div[text() = 'Grupo E']/ancestor::div[1]/../div[2]//button
+//div[text() = 'Grupo AM']/ancestor::div/div[@class='group-availables-grid-card-footer mt-2']//button
