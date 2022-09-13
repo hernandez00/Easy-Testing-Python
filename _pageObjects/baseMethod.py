@@ -19,6 +19,7 @@ class Base(object):
             ))
         except TimeoutException:
             return False
+        #print(element_value)
         return element_value
 
     def verify_title(self, title):
