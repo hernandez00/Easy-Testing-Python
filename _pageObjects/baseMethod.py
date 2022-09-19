@@ -2,7 +2,7 @@ from time import sleep
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
+from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException as ECIException
 
 
 class Base(object):
@@ -21,7 +21,7 @@ class Base(object):
             element_value = WebDriverWait(self, 15).until(EC.visibility_of_element_located(
                 element
             ))
-        except ElementClickInterceptedException:
+        except ECIException:
             element_value = WebDriverWait(self, 15).until(EC.element_to_be_clickable(
                 element
             ))
