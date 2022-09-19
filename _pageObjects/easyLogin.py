@@ -1,9 +1,9 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from _pageObjects._locators.loginLocators import LoginObjects
-from _pageObjects._locators.dashboardLocators import DashboardObjects
 from _pageObjects.baseMethod import Base
+from _pageObjects._locators.login import LoginObjects
+from _pageObjects._locators.dashboard import DashboardObjects
 
 
 class EasyLogin(Base):

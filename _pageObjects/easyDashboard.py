@@ -1,7 +1,7 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from _pageObjects._locators.dashboardLocators import DashboardObjects
+from _pageObjects._locators.dashboard import DashboardObjects
 from _pageObjects.baseMethod import Base
 
 

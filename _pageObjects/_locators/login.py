@@ -7,6 +7,6 @@ from selenium.webdriver.common.by import By
 
 class LoginObjects(object):
 
-    EDIT_DOCUMENT = (By.XPATH, "//input[@id='document']")
-    EDIT_PASSWORD = (By.XPATH, "//input[@id='password']")
+    EDIT_DOCUMENT = (By.XPATH, "//input[@formcontrolname = 'document']")
+    EDIT_PASSWORD = (By.XPATH, "//input[@formcontrolname = 'password']")
     BTN_LOGIN = (By.XPATH, "//button[contains(text(), 'Continuar')]")
