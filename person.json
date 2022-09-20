@@ -1,25 +1,30 @@
 {
-	"cpfCnpj": "913.466.068-20",
-	"name": "Carlos Elias Marcelo Nascimento",
-	"nameMother": "Hadassa Catarina",
-	"rg": "27.203.337-6",
-	"rgIssuer": "SSP",
-	"cnh": "5285255644",
-	"cnhNumber": "5854",
-	"dddPhone": "18",
-	"phone": "39327178",
-	"dddOne": "18",
-	"phoneOne": "994696410",
-	"email": "carlos_nascimento@recantoalmeida.com.br",
-	"addressZipCode": "16200-043",
-	"addressNumber": 757,
-	"gender": "male",	
-	"idade": 27,	
-	"data_nasc": "25/08/1995",
-	"sexo": "Masculino",
-	"signo": "Virgem",
-	"endereco": "Rua Roberto Clark",
-	"bairro": "Centro",
-	"cidade": "Birigüi",
-	"estado": "SP"
+    "text":{
+        "cpfCnpj":"913.466.068-20",
+        "name":"Carlos Elias Marcelo Nascimento",
+        "nameMother":"Hadassa Catarina",
+        "rg":"27.203.337-6",
+        "rgIssuer":"SSP",
+        "cnh":"5285255644",
+        "cnhNumber":"5854",
+        "dddPhone":"18",
+        "phone":"39327178",
+        "dddOne":"18",
+        "phoneOne":"994696410",
+        "email":"carlos_nascimento@recantoalmeida.com.br",
+        "addressZipCode":"16200-043",
+        "addressNumber":757
+    },
+    "datePicker":{
+        "dateBirth":"08/03/1995",
+        "dateFirst":"05/08/2019",
+        "cnhDateExpiration":"09/09/2029"
+    },
+    "combo":{
+        "gender":"male",
+        "codCareer":2,
+        "cnhIsoCountry":"BR",
+        "cnhState":"SP",
+        "addressCountry":"BR"
+    }
 }
