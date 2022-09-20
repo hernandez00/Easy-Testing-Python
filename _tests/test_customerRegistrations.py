@@ -6,7 +6,6 @@ import unittest
 import pytest
 from _webDriver.WebDriver import Driver
 from _pageObjects.easyLogin import EasyLogin
-from _pageObjects.easyDashboard import EasyDashboard
 from _pageObjects.easyMenu import EasyMenu
 from _pageObjects.easyCustomerRegistration import EasyCustomerRegistration as ECR
 
