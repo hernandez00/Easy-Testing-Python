@@ -45,7 +45,6 @@ def registration_filling(filedir="./person.json"):
                     locator = f"//ejs-datepicker[@formcontrolname='{k}']//input"
                 else:
                     locator = f"//ejs-dropdownlist[@formcontrolname='{k}']"
-                print(f"{k}: {v}. Locator: {locator}")
                 try:
                     element = wait.until(EC.visibility_of_element_located((
                         By.XPATH, locator)))
