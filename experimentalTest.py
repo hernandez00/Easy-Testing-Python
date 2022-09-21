@@ -33,6 +33,15 @@ def file_reading(filedir):
         person = json.loads(file.read())
     return person
 
+def textInteract():
+    pass
+
+def datePickerInteract():
+    pass
+
+def comboInteract():
+    pass
+
 
 def registration_filling(filedir="./person.json"):
     person = file_reading(filedir)
@@ -62,10 +71,10 @@ def registration_filling(filedir="./person.json"):
 
 
 wait.until(EC.visibility_of_element_located((
-    By.XPATH, "//input[@formcontrolname = 'document']"))).send_keys("41328599833")  # 41328599833
+    By.XPATH, "//input[@formcontrolname = 'document']"))).send_keys("46435591873")  # 41328599833
 
 wait.until(EC.visibility_of_element_located((
-    By.XPATH, "//input[@formcontrolname = 'password']"))).send_keys("a@449f9054")    # a@449f9054
+    By.XPATH, "//input[@formcontrolname = 'password']"))).send_keys("teste123")     # a@449f9054
 
 wait.until(EC.visibility_of_element_located((
     By.XPATH, "//button[contains(text(), 'Continuar')]"))).click()
