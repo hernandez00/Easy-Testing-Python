@@ -16,9 +16,9 @@
         "addressNumber":757
     },
     "datePicker":{
-        "dateBirth":"08/03/1995",
-        "dateFirst":"05/08/2019",
-        "cnhDateExpiration":"09/09/2029"
+        "dateBirth":"08031995",
+        "cnhDateFirst":"05082019",
+        "cnhDateExpiration":"09092029"
     },
     "combo":{
         "gender":"male",

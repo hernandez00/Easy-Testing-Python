@@ -1,7 +1,7 @@
 # Botão para verificar se o Cliente já está cadastrado: //button[@class = 'mat-tooltip-trigger btn btn-search-customer']
 
 # Campos datepicker: //ejs-datepicker[@formcontrolname='cnhDateExpiration']//input
-# ID's: dateBirth, dateFirst e cnhDateExpiration
+# ID's: dateBirth, cnhDateFirst e cnhDateExpiration
 
 # Campos text:       //input[@formcontrolname = 'cpfCnpj']
 # ID's: cpfCnpj, name, nameMother, rg, rgIssuer, cnh, cnhNumber (Número de segurança),
@@ -11,7 +11,6 @@
 # ID's: gender, codCareer, cnhIsoCountry, cnhState, addressCoutry
 
 import json
-from time import sleep
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
@@ -23,6 +22,7 @@ from selenium.common.exceptions import ElementClickInterceptedException as ECIex
 
 driver = webdriver.Chrome(service=ChromeService(
     ChromeDriverManager().install()))
+driver.set_window_size(1600, 900)
 driver.get("https://easy.unidas.com.br/login")
 #driver.get("https://easy.hml.unidas.com.br/login")
 wait = WebDriverWait(driver, 10)
@@ -45,7 +45,7 @@ def registration_filling(filedir="./person.json"):
                     locator = f"//ejs-datepicker[@formcontrolname='{k}']//input"
                 else:
                     locator = f"//ejs-dropdownlist[@formcontrolname='{k}']"
-                print(k, v)
+                print(f"{k}: {v}. Locator: {locator}")
                 try:
                     element = wait.until(EC.visibility_of_element_located((
                         By.XPATH, locator)))
