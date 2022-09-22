@@ -18,12 +18,13 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.common.exceptions import ElementClickInterceptedException as ECIexception, TimeoutException
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 driver = webdriver.Chrome(service=ChromeService(
     ChromeDriverManager().install()))
 driver.set_window_size(1600, 900)
-#driver.get("https://easy.unidas.com.br/login")
+# driver.get("https://easy.unidas.com.br/login")
 driver.get("https://easy.hml.unidas.com.br/login")
 wait = WebDriverWait(driver, 10)
 
@@ -40,7 +41,7 @@ def textInteract(locator, value):
 
     element = wait.until(EC.presence_of_element_located((
         By.XPATH, f"//input[@formcontrolname = '{locator}']")))
-    
+
     element.send_keys(value)
 
 # Função para preencher campos do tipo Date Picker
@@ -49,9 +50,14 @@ def datePickerInteract(locator, value):
         By.XPATH, f"//ejs-datepicker[@formcontrolname='{locator}']//input")))
 
     element = wait.until(EC.presence_of_element_located((
-        By.XPATH, f"//ejs-datepicker[@formcontrolname='{locator}']//input]")))
-    
-    element.send_keys(value)
+        By.XPATH, f"//ejs-datepicker[@formcontrolname='{locator}']//input")))
+
+    ActionChains(driver)\
+        .move_to_element(element)\
+        .double_click()\
+        .click_and_hold()\
+        .send_keys_to_element(element, value)\
+        .perform()
 
 # Função para preencher campos do tipo ComboBox
 def comboInteract(locator, value):
@@ -60,7 +66,7 @@ def comboInteract(locator, value):
 
     element = wait.until(EC.presence_of_element_located((
         By.XPATH, f"//ejs-dropdownlist[@formcontrolname='{locator}']")))
-    
+
     element.send_keys(value)
 
 # Função para percorrer o arquivo jSon e chamar as funções
@@ -97,6 +103,12 @@ wait.until(EC.visibility_of_element_located((
 
 wait.until(EC.visibility_of_element_located((
     By.XPATH, "//button[contains(text(), 'Continuar')]"))).click()
+
+ActionChains(driver)\
+    .move_to_element(wait.until(EC.visibility_of_element_located((
+        By.XPATH, "//und-menu-outlined-icon[@class = 'text-white menu-icon']"))))\
+    .click()\
+    .perform()
 
 wait.until(EC.element_to_be_clickable((
     By.XPATH, "//und-menu-outlined-icon[@class = 'text-white menu-icon']"))).click()
