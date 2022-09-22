@@ -26,16 +26,15 @@ from selenium.webdriver.common.keys import Keys
 driver = webdriver.Chrome(service=ChromeService(
     ChromeDriverManager().install()))
 driver.set_window_size(1600, 900)
-# driver.get("https://easy.unidas.com.br/login")
-driver.get("https://easy.hml.unidas.com.br/login")
+driver.get("https://easy.unidas.com.br/login")
+#driver.get("https://easy.hml.unidas.com.br/login")
 wait = WebDriverWait(driver, 10)
 
 # Função para aguardar a tela de carregamento
-""" @@@@@@@@@@@@@@@@@@@@ Ainda não está 100% funcional @@@@@@@@@@@@@@@@@@@@ """
 def loadScreenWait():
-    wait.until(EC.visibility_of_element_located((
+    """wait.until(EC.visibility_of_element_located((
         By.XPATH, "//div[@class='overlay ng-tns-c49-0 ng-trigger ng-trigger-fadeIn ng-star-inserted']"
-    )))
+    )))"""
 
     wait.until(EC.invisibility_of_element_located((
         By.XPATH, "//div[@class='overlay ng-tns-c49-0 ng-trigger ng-trigger-fadeIn ng-star-inserted']"
@@ -71,13 +70,21 @@ def datePickerInteract(locator, value):
         .perform()
 
 # Função para preencher campos do tipo ComboBox
-""" @@@@@@@@@@@@@@@@@@@@ Ainda não está 100% funcional @@@@@@@@@@@@@@@@@@@@ """
 def comboInteract(locator, value):
     element = wait.until(EC.presence_of_element_located((
-        By.XPATH, f"//ejs-dropdownlist[@formcontrolname = '{locator}']"))).click()
+        By.XPATH, f"//ejs-dropdownlist[@formcontrolname = '{locator}']")))
+    ActionChains(driver)\
+        .move_to_element(element)\
+        .click()\
+        .perform()
 
     element_value = wait.until(EC.presence_of_element_located((
-        By.XPATH, f"//li[contains(text(), '{value}')]"))).click()
+        By.XPATH, f"//li[contains(text(), '{value}')]")))
+    ActionChains(driver)\
+        .pause(0.5)\
+        .move_to_element(element_value)\
+        .click()\
+        .perform()
 
 # Função para percorrer o arquivo jSon e chamar as funções
 # de preenchimento de acordo com o tipo do campo.
@@ -107,10 +114,10 @@ def registration_filling(filedir="./person.json"):
 
 
 wait.until(EC.visibility_of_element_located((
-    By.XPATH, "//input[@formcontrolname = 'document']"))).send_keys("46435591873")  # 41328599833
+    By.XPATH, "//input[@formcontrolname = 'document']"))).send_keys("41328599833")  # 41328599833
 
 wait.until(EC.visibility_of_element_located((
-    By.XPATH, "//input[@formcontrolname = 'password']"))).send_keys("teste123")     # a@449f9054
+    By.XPATH, "//input[@formcontrolname = 'password']"))).send_keys("a@449f9054")     # a@449f9054
 
 wait.until(EC.visibility_of_element_located((
     By.XPATH, "//button[contains(text(), 'Continuar')]"))).click()
