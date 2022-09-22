@@ -16,6 +16,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.select import Select
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.common.exceptions import ElementClickInterceptedException as ECIexception, TimeoutException
 from selenium.webdriver.common.action_chains import ActionChains
@@ -30,6 +31,7 @@ driver.get("https://easy.hml.unidas.com.br/login")
 wait = WebDriverWait(driver, 10)
 
 # Função para aguardar a tela de carregamento
+""" @@@@@@@@@@@@@@@@@@@@ Ainda não está 100% funcional @@@@@@@@@@@@@@@@@@@@ """
 def loadScreenWait():
     wait.until(EC.visibility_of_element_located((
         By.XPATH, "//div[@class='overlay ng-tns-c49-0 ng-trigger ng-trigger-fadeIn ng-star-inserted']"
@@ -69,11 +71,13 @@ def datePickerInteract(locator, value):
         .perform()
 
 # Função para preencher campos do tipo ComboBox
+""" @@@@@@@@@@@@@@@@@@@@ Ainda não está 100% funcional @@@@@@@@@@@@@@@@@@@@ """
 def comboInteract(locator, value):
-    element = wait.until(EC.visibility_of_element_located((
-        By.XPATH, f"//ejs-dropdownlist[@formcontrolname='{locator}']")))
+    element = wait.until(EC.presence_of_element_located((
+        By.XPATH, f"//ejs-dropdownlist[@formcontrolname = '{locator}']"))).click()
 
-    element.click()
+    element_value = wait.until(EC.presence_of_element_located((
+        By.XPATH, f"//li[contains(text(), '{value}')]"))).click()
 
 # Função para percorrer o arquivo jSon e chamar as funções
 # de preenchimento de acordo com o tipo do campo.
@@ -99,6 +103,7 @@ def registration_filling(filedir="./person.json"):
                     print(
                         f'Erro ao aguardar pelo elemento {k}: TimeoutException.')
                     return False
+        print('='*15 + f'Fim {client}' + '='*15)
 
 
 wait.until(EC.visibility_of_element_located((
@@ -110,13 +115,7 @@ wait.until(EC.visibility_of_element_located((
 wait.until(EC.visibility_of_element_located((
     By.XPATH, "//button[contains(text(), 'Continuar')]"))).click()
 
-wait.until(EC.visibility_of_element_located((
-    By.XPATH, "//div[@class='overlay ng-tns-c49-0 ng-trigger ng-trigger-fadeIn ng-star-inserted']"
-)))
-
-wait.until(EC.invisibility_of_element_located((
-    By.XPATH, "//div[@class='overlay ng-tns-c49-0 ng-trigger ng-trigger-fadeIn ng-star-inserted']"
-)))
+loadScreenWait()
 
 wait.until(EC.element_to_be_clickable((
     By.XPATH, "//und-menu-outlined-icon[@class = 'text-white menu-icon']"))).click()

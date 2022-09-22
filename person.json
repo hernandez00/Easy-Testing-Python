@@ -22,41 +22,11 @@
             "cnhDateExpiration":"09092029"
         },
         "combo":{
-            "gender":"male",
-            "codCareer":2,
-            "cnhIsoCountry":"BR",
+            "gender":"Masculino",
+            "codCareer":"UNIVERSITARIO",
+            "cnhIsoCountry":"BRASIL",
             "cnhState":"SP",
-            "addressCoutry":"BR"
-        }
-    },
-    "client2":{
-        "text":{
-            "cpfCnpj":"913.466.068-20",
-            "name":"Carlos Elias Marcelo Nascimento",
-            "nameMother":"Hadassa Catarina",
-            "rg":"27.203.337-6",
-            "rgIssuer":"SSP",
-            "cnh":"5285255644",
-            "cnhNumber":"5854",
-            "dddPhone":"18",
-            "phone":"39327178",
-            "dddOne":"18",
-            "phoneOne":"994696410",
-            "email":"carlos_nascimento@recantoalmeida.com.br",
-            "addressZipCode":"16200-043",
-            "addressNumber":757
-        },
-        "datePicker":{
-            "dateBirth":"08031995",
-            "cnhDateFirst":"05082019",
-            "cnhDateExpiration":"09092029"
-        },
-        "combo":{
-            "gender":"male",
-            "codCareer":2,
-            "cnhIsoCountry":"BR",
-            "cnhState":"SP",
-            "addressCountry":"BR"
+            "addressCoutry":"BRASIL"
         }
     }
 }
