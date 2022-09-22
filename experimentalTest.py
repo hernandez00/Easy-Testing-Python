@@ -19,6 +19,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.common.exceptions import ElementClickInterceptedException as ECIexception, TimeoutException
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 
 
 driver = webdriver.Chrome(service=ChromeService(
@@ -27,6 +28,16 @@ driver.set_window_size(1600, 900)
 # driver.get("https://easy.unidas.com.br/login")
 driver.get("https://easy.hml.unidas.com.br/login")
 wait = WebDriverWait(driver, 10)
+
+# Função para aguardar a tela de carregamento
+def loadScreenWait():
+    wait.until(EC.visibility_of_element_located((
+        By.XPATH, "//div[@class='overlay ng-tns-c49-0 ng-trigger ng-trigger-fadeIn ng-star-inserted']"
+    )))
+
+    wait.until(EC.invisibility_of_element_located((
+        By.XPATH, "//div[@class='overlay ng-tns-c49-0 ng-trigger ng-trigger-fadeIn ng-star-inserted']"
+    )))
 
 # Função para ler o arquivo jSon
 def file_reading(filedir):
@@ -39,17 +50,15 @@ def textInteract(locator, value):
     element = wait.until(EC.visibility_of_element_located((
         By.XPATH, f"//input[@formcontrolname = '{locator}']")))
 
-    element = wait.until(EC.presence_of_element_located((
-        By.XPATH, f"//input[@formcontrolname = '{locator}']")))
-
     element.send_keys(value)
+
+    if locator == 'addressZipCode':
+        element.send_keys(Keys.TAB)
+        loadScreenWait()
 
 # Função para preencher campos do tipo Date Picker
 def datePickerInteract(locator, value):
     element = wait.until(EC.visibility_of_element_located((
-        By.XPATH, f"//ejs-datepicker[@formcontrolname='{locator}']//input")))
-
-    element = wait.until(EC.presence_of_element_located((
         By.XPATH, f"//ejs-datepicker[@formcontrolname='{locator}']//input")))
 
     ActionChains(driver)\
@@ -64,10 +73,7 @@ def comboInteract(locator, value):
     element = wait.until(EC.visibility_of_element_located((
         By.XPATH, f"//ejs-dropdownlist[@formcontrolname='{locator}']")))
 
-    element = wait.until(EC.presence_of_element_located((
-        By.XPATH, f"//ejs-dropdownlist[@formcontrolname='{locator}']")))
-
-    element.send_keys(value)
+    element.click()
 
 # Função para percorrer o arquivo jSon e chamar as funções
 # de preenchimento de acordo com o tipo do campo.
@@ -104,19 +110,21 @@ wait.until(EC.visibility_of_element_located((
 wait.until(EC.visibility_of_element_located((
     By.XPATH, "//button[contains(text(), 'Continuar')]"))).click()
 
-ActionChains(driver)\
-    .move_to_element(wait.until(EC.visibility_of_element_located((
-        By.XPATH, "//und-menu-outlined-icon[@class = 'text-white menu-icon']"))))\
-    .click()\
-    .perform()
+wait.until(EC.visibility_of_element_located((
+    By.XPATH, "//div[@class='overlay ng-tns-c49-0 ng-trigger ng-trigger-fadeIn ng-star-inserted']"
+)))
+
+wait.until(EC.invisibility_of_element_located((
+    By.XPATH, "//div[@class='overlay ng-tns-c49-0 ng-trigger ng-trigger-fadeIn ng-star-inserted']"
+)))
 
 wait.until(EC.element_to_be_clickable((
     By.XPATH, "//und-menu-outlined-icon[@class = 'text-white menu-icon']"))).click()
 
-wait.until(EC.visibility_of_element_located((
+wait.until(EC.element_to_be_clickable((
     By.XPATH, "//li[2]/div"))).click()
 
-wait.until(EC.visibility_of_element_located((
+wait.until(EC.element_to_be_clickable((
     By.XPATH, "//li[2]/ul/li/div"))).click()
 
 registration_filling()
