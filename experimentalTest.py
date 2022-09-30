@@ -11,6 +11,8 @@
 # ID's: gender, codCareer, cnhIsoCountry, cnhState, addressCoutry
 
 import json
+from time import sleep
+import pyautogui as PG
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
@@ -26,19 +28,19 @@ from selenium.webdriver.common.keys import Keys
 driver = webdriver.Chrome(service=ChromeService(
     ChromeDriverManager().install()))
 driver.set_window_size(1600, 900)
-driver.get("https://easy.unidas.com.br/login")
-#driver.get("https://easy.hml.unidas.com.br/login")
+#driver.get("https://easy.unidas.com.br/login")
+driver.get("https://easy.hml.unidas.com.br/login")
 wait = WebDriverWait(driver, 10)
 
 # Função para aguardar a tela de carregamento
 def loadScreenWait():
-    """wait.until(EC.visibility_of_element_located((
-        By.XPATH, "//div[@class='overlay ng-tns-c49-0 ng-trigger ng-trigger-fadeIn ng-star-inserted']"
-    )))"""
+    element = wait.until(EC.visibility_of_element_located((
+        By.XPATH, "//div[@class='overlay ng-tns-c49-0 ng-trigger ng-trigger-fadeIn ng-star-inserted ng-animating']")))
 
-    wait.until(EC.invisibility_of_element_located((
-        By.XPATH, "//div[@class='overlay ng-tns-c49-0 ng-trigger ng-trigger-fadeIn ng-star-inserted']"
-    )))
+    sleep(15)
+
+    """wait.until(EC.invisibility_of_element_located((
+        By.XPATH, "//div[@class='overlay ng-tns-c49-0 ng-trigger ng-trigger-fadeIn ng-star-inserted ng-animating']")))"""
 
 # Função para ler o arquivo jSon
 def file_reading(filedir):
@@ -86,8 +88,11 @@ def comboInteract(locator, value):
         .click()\
         .perform()
 
+def documents_sending():
+    pass
+
 # Função para percorrer o arquivo jSon e chamar as funções
-# de preenchimento de acordo com o tipo do campo.
+# de preenchimento de acordo com o tipo do campo. CPF 913.466.068-20
 def registration_filling(filedir="./person.json"):
     person = file_reading(filedir)
     for client, data in person.items():
@@ -99,6 +104,28 @@ def registration_filling(filedir="./person.json"):
                 try:
                     if k_data == "text":
                         textInteract(k, v)
+                        # Remover para realizar o fluxo completo de cadastro de cliente @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                        #//button[@class = 'mat-tooltip-trigger btn btn-search-customer']
+                        wait.until(EC.element_to_be_clickable((
+                            By.XPATH, "//button[@class = 'mat-tooltip-trigger btn btn-search-customer']"))).click()
+                        user_exist = wait.until(EC.text_to_be_present_in_element_value((
+                            By.XPATH, "//input[@formcontrolname = 'name']"), "LEONARDO HERNANDEZ"))
+                        if user_exist:
+                            PG.alert(text='Usuário existe!', title='Sucesso!', button='OK')
+                            #avançar para a tela de documentos
+                            wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@type = 'submit']"))).click()
+                            wait.until(EC.visibility_of_element_located((By.XPATH, "//p[text() = 'Usuário atualizado com sucesso.']")))
+                            wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'OK')]"))).click()
+                            titulo = wait.until(EC.visibility_of_element_located((By.XPATH, "//h5[text() = 'Importação de Arquivos']")))
+                            if titulo:
+                                PG.alert(text='Tela de importação de arquivos!', title='Sucesso!', button='OK')
+                                #Informar documentos
+                                select_element = wait.until(EC.visibility_of_element_located((
+                                    By.XPATH, "//select[@class = 'form-control']")))
+                                select_element = Select(select_element)
+                                select_element.select_by_visible_text("Foto do Rosto")
+                            return False
+                        # Remover para realizar o fluxo completo de cadastro de cliente @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                     elif k_data == "datePicker":
                         datePickerInteract(k, v)
                     else:
@@ -110,14 +137,15 @@ def registration_filling(filedir="./person.json"):
                     print(
                         f'Erro ao aguardar pelo elemento {k}: TimeoutException.')
                     return False
+        documents_sending()
         print('='*15 + f'Fim {client}' + '='*15)
 
 
 wait.until(EC.visibility_of_element_located((
-    By.XPATH, "//input[@formcontrolname = 'document']"))).send_keys("41328599833")  # 41328599833
+    By.XPATH, "//input[@formcontrolname = 'document']"))).send_keys("46435591873")  # 41328599833
 
 wait.until(EC.visibility_of_element_located((
-    By.XPATH, "//input[@formcontrolname = 'password']"))).send_keys("a@449f9054")     # a@449f9054
+    By.XPATH, "//input[@formcontrolname = 'password']"))).send_keys("teste123")     # a@449f9054
 
 wait.until(EC.visibility_of_element_located((
     By.XPATH, "//button[contains(text(), 'Continuar')]"))).click()

@@ -13,7 +13,7 @@ Cadastro de cliente:
 //button[@type = 'submit']
 
 -- Mensagem de sucesso
-//p[text() = 'Usuário atualizado com sucesso.']
+//p[text() = 'Usuário cadastrado com sucesso.']
 
 -- Button OK
 //button[contains(text(), 'OK')]
