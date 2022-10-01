@@ -142,10 +142,10 @@ def registration_filling(filedir="./person.json"):
 
 
 wait.until(EC.visibility_of_element_located((
-    By.XPATH, "//input[@formcontrolname = 'document']"))).send_keys("46435591873")  # 41328599833
+    By.XPATH, "//input[@formcontrolname = 'document']"))).send_keys("46435591873")
 
 wait.until(EC.visibility_of_element_located((
-    By.XPATH, "//input[@formcontrolname = 'password']"))).send_keys("teste123")     # a@449f9054
+    By.XPATH, "//input[@formcontrolname = 'password']"))).send_keys("teste123") 
 
 wait.until(EC.visibility_of_element_located((
     By.XPATH, "//button[contains(text(), 'Continuar')]"))).click()
